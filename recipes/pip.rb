@@ -33,6 +33,10 @@ else
   pip_binary = "/usr/local/bin/pip"
 end
 
+directory Chef::Config[:file_cache_path] do
+  recursive true
+end
+
 cookbook_file "#{Chef::Config[:file_cache_path]}/ez_setup.py" do
   source 'ez_setup.py'
   mode "0644"
