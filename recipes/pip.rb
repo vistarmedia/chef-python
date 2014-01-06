@@ -53,10 +53,13 @@ execute "install-setuptools" do
   not_if "#{node['python']['binary']} -c 'import setuptools'"
 end
 
-execute "install-pip" do
-  cwd Chef::Config[:file_cache_path]
-  command <<-EOF
-  #{node['python']['binary']} get-pip.py
-  EOF
-  not_if { ::File.exists?(pip_binary) }
-end
+# Installing ubuntu pip package to avoid compatibility issues with pip 1.5
+package 'python-pip'
+
+# execute "install-pip" do
+#   cwd Chef::Config[:file_cache_path]
+#   command <<-EOF
+#   #{node['python']['binary']} get-pip.py
+#   EOF
+#   not_if { ::File.exists?(pip_binary) }
+# end

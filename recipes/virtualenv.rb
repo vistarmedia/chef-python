@@ -20,6 +20,8 @@
 
 include_recipe "python::pip"
 
+# Installing virtualenv 1.10.1 to avoid compatibility issues with pip 1.5
 python_pip "virtualenv" do
-  action :install
+  action  :install
+  version '1.10.1'
 end
